@@ -28,4 +28,4 @@ Shared resources are strictly protected using Mutexes (`pthread_mutex_t`):
 ## Resources
 * POSIX Threads Programming Documentation
 * Coffman's Conditions for Deadlock
-* AI Usage: AI was utilized as a peer-programmer to help optimize the Min-Heap array mathematics for the scheduler, debug Valgrind/Helgrind race conditions by isolating unprotected variable reads, and ensure functions complied with the strict 25-line Norminette limits.
+* AI Usage: AI was utilized as a peer-programmer to help optimize the Min-Heap array mathematics for the scheduler and debug Valgrind/Helgrind race conditions by isolating unprotected variable reads.

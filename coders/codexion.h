@@ -6,7 +6,7 @@
 /*   By: luida-cu <luida-cu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:18:13 by luida-cu          #+#    #+#             */
-/*   Updated: 2026/03/24 20:19:24 by luida-cu         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:33:34 by luida-cu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <stdio.h>
 # include <string.h>
 
-/* ** Forward declarations so our structs can reference each other 
-*/
 typedef struct s_hub	t_hub;
 typedef struct s_coder	t_coder;
 typedef struct s_dongle	t_dongle;
@@ -49,8 +47,6 @@ typedef struct s_coder
 	pthread_t		thread_id;
 	pthread_mutex_t	coder_mutex;
 	t_hub			*hub; // Pointer back to the shared data
-	struct s_coder	*prev; // Doubly linked list pointer
-	struct s_coder	*next; // Doubly linked list pointer
 }	t_coder;
 
 struct s_hub

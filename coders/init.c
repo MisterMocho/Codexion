@@ -6,7 +6,7 @@
 /*   By: luida-cu <luida-cu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:47:05 by luida-cu          #+#    #+#             */
-/*   Updated: 2026/03/24 20:19:47 by luida-cu         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:33:32 by luida-cu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ static int	init_dongles(t_hub *hub)
 	return (0);
 }
 
-static void	link_coders(t_hub *hub)
-{
-	int	i;
-	int	prev_idx;
-	int	next_idx;
-
-	i = 0;
-	while (i < hub->num_coders)
-	{
-		prev_idx = (i - 1 + hub->num_coders) % hub->num_coders;
-		next_idx = (i + 1) % hub->num_coders;
-		hub->coders[i]->prev = hub->coders[prev_idx];
-		hub->coders[i]->next = hub->coders[next_idx];
-		i++;
-	}
-}
-
 static int	init_coders(t_hub *hub)
 {
 	int	i;
@@ -79,7 +62,6 @@ static int	init_coders(t_hub *hub)
 		hub->coders[i]->right_dongle = hub->dongles[(i + 1) % hub->num_coders];
 		i++;
 	}
-	link_coders(hub);
 	return (0);
 }
 

@@ -6,11 +6,17 @@
 /*   By: luida-cu <luida-cu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:18:17 by luida-cu          #+#    #+#             */
-/*   Updated: 2026/03/18 20:29:48 by luida-cu         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:17:32 by luida-cu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+static int	print_error(char *msg)
+{
+	printf("%s\n", msg);
+	return (1);
+}
 
 static int	parse_positive_int(const char *str)
 {
@@ -40,7 +46,7 @@ static int	parse_positive_int(const char *str)
 int	parse_args(t_hub *hub, int argc, char **argv)
 {
 	if (argc != 9)
-		return (printf("Error: Invalid number of arguments.\n"), 1);
+		return (print_error("Error: Invalid number of arguments."));
 	hub->num_coders = parse_positive_int(argv[1]);
 	hub->time_to_burnout = parse_positive_int(argv[2]);
 	hub->time_to_compile = parse_positive_int(argv[3]);
@@ -52,15 +58,15 @@ int	parse_args(t_hub *hub, int argc, char **argv)
 		|| hub->time_to_compile < 0 || hub->time_to_debug < 0
 		|| hub->time_to_refactor < 0 || hub->required_compiles < 0
 		|| hub->dongle_cooldown < 0)
-		return (
-			printf("Error: Arguments must be valid positive integers.\n"), 1);
+		return (print_error(
+				"Error: Arguments must be valid positive integers."));
 	if (strcmp(argv[8], "fifo") == 0)
 		hub->scheduler_type = 0;
 	else if (strcmp(argv[8], "edf") == 0)
 		hub->scheduler_type = 1;
 	else
-		return (
-			printf("Error: Scheduler must be exactly 'fifo' or 'edf'.\n"), 1);
+		return (print_error(
+				"Error: Scheduler must be exactly 'fifo' or 'edf'."));
 	hub->simulation_running = 1;
 	return (0);
 }

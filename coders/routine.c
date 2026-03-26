@@ -6,7 +6,7 @@
 /*   By: luida-cu <luida-cu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 17:17:09 by luida-cu          #+#    #+#             */
-/*   Updated: 2026/03/24 20:39:49 by luida-cu         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:53:52 by luida-cu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 static void	*one_coder_routine(t_coder *coder)
 {
+	int	running;
+
 	pthread_mutex_lock(&coder->left_dongle->mutex);
 	print_status(coder, "has taken a dongle");
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
-	while (coder->hub->simulation_running)
+	pthread_mutex_lock(&coder->hub->print_mutex);
+	running = coder->hub->simulation_running;
+	pthread_mutex_unlock(&coder->hub->print_mutex);
+	while (running)
+	{	
+		pthread_mutex_lock(&coder->hub->print_mutex);
+		running = coder->hub->simulation_running;
+		pthread_mutex_unlock(&coder->hub->print_mutex);
 		usleep(500);
+	}
 	return (NULL);
 }
 
